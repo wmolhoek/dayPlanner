@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Day Planner</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+</head>
+
+<body>
+    <header class="jumbotron">
+        <h1 class="display-3">Day Planner</h1>
+        <p class="lead">A simple app for scheduling your day</p>
+        <p id="currentDay" class="lead"></p>
+    </header>
+
+    <div class="container">
+        <div class="row" id="_9">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_9AM">9A</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea9">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn9"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_10">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_10AM">10A</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea10">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn10"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_11">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_11AM">11A</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea11">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn11"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_12">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_12PM">12P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea12">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn12"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_13">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_1PM">1P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea13">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn13"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_14">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_2PM">2P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea14">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn14"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_15">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_3PM">3P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea15">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn15"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_16">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_4PM">4P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea16">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn16"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+        <div class="row" id="_17">
+            <div class="hour col-1 col-s-1 col-xs-1" id="_5PM">5P</div>
+            <textarea class="textarea col-10 col-s-1 col-xs-1" id="_txtArea17">your appointment info</textarea>
+            <button class="btn saveBtn col-1 col-s-1 col-xs-1" id="_btn17"><i class="fas fa-save"></i>Save</button>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const firstHour = 9;
+            const finalHour = 17;
+            var currentDayEl = $("#currentDay")
+            var dayIs = moment().format("dddd, MMMM Do YYYY");
+            currentDayEl.text(dayIs);
+            var apptInfo =
+            {
+                hour: null,
+                subject: null
+            };
+            var i = 0;
+            var info = "";
+
+            for (i = 0; i < 9; i++) {
+                const varName = "currentSubject";
+                var apptHour = 0;
+
+                info = localStorage.getItem("_btn" + (i + 9));
+                apptHour = i + 9;
+                $("#_txtArea" + apptHour).text(info)
+            }
+
+            $(".btn").on("click", function () {
+                var getBtnId = "";
+                getBtnId = $(this).attr("id");
+                var calcHour = getBtnId;
+                var subjectEl = "";
+                subjectEl = document.getElementById("_txtArea".concat(calcHour.replace("_btn", ""))).value;
+
+                apptInfo.hour = getBtnId;
+                apptInfo.subject = subjectEl;
+                localStorage.setItem(apptInfo.hour, JSON.stringify(apptInfo.subject));
+            });
+
+            var currentHour = moment();
+            let hour = currentHour.get('hour');
+
+            if (hour < 9 || hour > 17) {
+                $(".row").addClass("past");
+            }
+            else {
+                pastRows = hour - firstHour;
+                futureRows = finalHour - hour;
+                for (i = 0; i <= pastRows; i++) {
+                    $("#_" + (hour - i)).addClass("past");
+                }
+                $("#_" + hour).addClass("present");
+                for (i = 1; i <= futureRows; i++)
+                    $("#_" + (hour + i)).addClass("future");
+            }
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>
